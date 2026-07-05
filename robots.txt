@@ -1,6 +1,36 @@
-# robots.txt – Silvia Schuldis
-# HINWEIS: Domain in der Sitemap-Zeile anpassen, sobald die finale Domain feststeht.
+# robots.txt – Silvia Gabi Schuldis
+# HINWEIS: Basis-URL beim Umzug auf die finale Domain anpassen (aktuell GitHub-Pages-Vorschau).
+
+# Klassische Suchmaschinen
 User-agent: *
 Allow: /
 
-Sitemap: https://www.silvia-schuldis.de/sitemap.xml
+# KI-Crawler ausdrücklich erlaubt (GEO: Sichtbarkeit in ChatGPT, Claude, Perplexity, Gemini & Co.)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://mrrobb86.github.io/silvia-schuldis-website/sitemap.xml
