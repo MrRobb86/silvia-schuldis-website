@@ -1,0 +1,6 @@
+# robots.txt – Silvia Schuldis
+# HINWEIS: Domain in der Sitemap-Zeile anpassen, sobald die finale Domain feststeht.
+User-agent: *
+Allow: /
+
+Sitemap: https://www.silvia-schuldis.de/sitemap.xml
