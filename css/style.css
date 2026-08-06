@@ -274,18 +274,6 @@ strong { font-weight: 700; }
 .offer { position: relative; }
 .offer .offer-link::before { content: ""; position: absolute; inset: 0; z-index: 1; }
 
-/* Angebots-Kachel ohne Foto. Für Angebote, die online stattfinden: Ein Ortsfoto
-   würde dort in die Irre führen, und ein passendes Motiv gibt es (noch) nicht. */
-.offer-media.grafik {
-  display: grid; place-items: center; text-align: center;
-  background: linear-gradient(135deg, var(--pine) 0%, var(--pine-deep) 100%);
-  color: #F6F3EA;
-}
-.offer-media.grafik .gr-zahl { font-family: var(--font-display); font-size: clamp(2.4rem, 7vw, 3.2rem); line-height: 1; }
-.offer-media.grafik .gr-text {
-  display: block; margin-top: .35rem;
-  font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; opacity: .85;
-}
 
 /* Detailseiten: Kopf */
 .page-hero { position: relative; padding: clamp(3rem, 6vw, 4.5rem) 0; background: var(--paper-deep); overflow: hidden; }
