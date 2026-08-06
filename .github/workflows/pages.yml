@@ -1,0 +1,43 @@
+name: Website veröffentlichen
+
+# Die Seite ist reines HTML/CSS/JS. Der alte Pages-Mechanismus („legacy") ließ
+# Jekyll darüberlaufen und brach ab 06.08.2026 reproduzierbar mit „Page build
+# failed" ab. Dieser Weg lädt die Dateien unverändert hoch und zeigt im
+# Fehlerfall ein richtiges Protokoll.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Läufe nicht abbrechen, damit eine begonnene Veröffentlichung durchläuft.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  veroeffentlichen:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Quellcode holen
+        uses: actions/checkout@v4
+
+      - name: Pages vorbereiten
+        uses: actions/configure-pages@v5
+
+      - name: Dateien hochladen
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Veröffentlichen
+        id: deployment
+        uses: actions/deploy-pages@v4
