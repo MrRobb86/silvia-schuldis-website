@@ -46,7 +46,10 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: clip; /* verhindert horizontales Scrollen durch dekorative Elemente */
 }
-img { max-width: 100%; display: block; }
+/* height:auto ist entscheidend: Ohne diese Angabe behalten Bilder mit
+   width/height-Attributen im HTML ihre Pixel-Höhe, während die Breite mitskaliert
+   — auf dem Handy werden sie dadurch gestaucht. */
+img { max-width: 100%; height: auto; display: block; }
 a { color: var(--pine); text-decoration-thickness: 1px; text-underline-offset: 3px; }
 a:hover { color: var(--terra); }
 :focus-visible { outline: 3px solid var(--terra); outline-offset: 3px; border-radius: 4px; }
@@ -185,6 +188,32 @@ strong { font-weight: 700; }
   font-size: 1.12rem;
 }
 
+/* Persönliches Zitat von Silvia — bewusst ohne Kasten, damit es neben den
+   Karten und dem Insight-Block nicht als dritte Box wirkt. */
+.zitat-silvia {
+  max-width: 760px; margin: 2.4rem auto 0; text-align: center; position: relative;
+  padding-top: 2.2rem;
+}
+.zitat-silvia::before {
+  content: "„"; position: absolute; top: -.4rem; left: 50%; transform: translateX(-50%);
+  font-family: var(--font-display); font-size: 4.2rem; line-height: 1;
+  color: var(--terra); opacity: .35;
+}
+.zitat-silvia p {
+  font-family: var(--font-display); font-style: italic;
+  font-size: 1.28rem; line-height: 1.55; color: var(--pine-deep);
+  text-wrap: balance;
+}
+.zitat-silvia cite {
+  display: block; margin-top: .9rem; font-style: normal;
+  font-size: .82rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft);
+}
+@media (max-width: 600px) {
+  .zitat-silvia { padding-top: 1.8rem; text-align: left; }
+  .zitat-silvia::before { left: 0; transform: none; font-size: 3.4rem; }
+  .zitat-silvia p { font-size: 1.12rem; }
+}
+
 /* Vorher / Nachher */
 .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
 .ba-col { padding: 2.2rem 2rem; }
@@ -233,16 +262,37 @@ strong { font-weight: 700; }
 }
 .offer-body { padding: 1.7rem 1.7rem 1.9rem; display: flex; flex-direction: column; gap: .8rem; flex: 1; }
 .offer-body p { color: var(--ink-soft); font-size: 1rem; flex: 1; }
-.offer-link { font-weight: 700; text-decoration: none; color: var(--terra); }
+.offer-link {
+  font-weight: 700; text-decoration: none; color: var(--terra);
+  /* Als Block mit Innenabstand, damit die Tippfläche auf dem Handy die
+     empfohlenen ~44 px erreicht — als reine Textzeile waren es nur 29 px. */
+  display: inline-block; padding: .55rem 0;
+}
 .offer-link:hover { color: var(--terra-deep); }
 .offer-link::after { content: " →"; }
+/* Innerhalb einer Angebotskarte ist die ganze Karte antippbar. */
+.offer { position: relative; }
+.offer .offer-link::before { content: ""; position: absolute; inset: 0; z-index: 1; }
+
+/* Angebots-Kachel ohne Foto. Für Angebote, die online stattfinden: Ein Ortsfoto
+   würde dort in die Irre führen, und ein passendes Motiv gibt es (noch) nicht. */
+.offer-media.grafik {
+  display: grid; place-items: center; text-align: center;
+  background: linear-gradient(135deg, var(--pine) 0%, var(--pine-deep) 100%);
+  color: #F6F3EA;
+}
+.offer-media.grafik .gr-zahl { font-family: var(--font-display); font-size: clamp(2.4rem, 7vw, 3.2rem); line-height: 1; }
+.offer-media.grafik .gr-text {
+  display: block; margin-top: .35rem;
+  font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; opacity: .85;
+}
 
 /* Detailseiten: Kopf */
 .page-hero { position: relative; padding: clamp(3rem, 6vw, 4.5rem) 0; background: var(--paper-deep); overflow: hidden; }
 .page-hero.has-img::before { content: ""; position: absolute; inset: 0; background: var(--img) center/cover; opacity: .16; }
 .page-hero .wrap { position: relative; }
 .breadcrumb { font-size: .9rem; color: var(--ink-soft); margin-bottom: 1.4rem; }
-.breadcrumb a { color: inherit; text-decoration: none; }
+.breadcrumb a { color: inherit; text-decoration: none; display: inline-block; padding: .35rem 0; }
 .breadcrumb a:hover { color: var(--terra); }
 .breadcrumb span { margin: 0 .45rem; opacity: .6; }
 .page-hero h1 { margin: .6rem 0 1rem; max-width: 850px; }
@@ -261,6 +311,47 @@ strong { font-weight: 700; }
 }
 .callout.warm { background: var(--terra-soft); border-left-color: var(--terra); color: var(--terra-deep); }
 .detail-photo { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-soft); margin: 1.8rem 0; }
+
+/* Häufige Fragen — sichtbar auf der Seite, damit die FAQ-Auszeichnung im
+   Seitenkopf gedeckt ist. Google verlangt, dass ausgezeichnete Inhalte auch
+   für Besucher sichtbar sind. */
+.faq details {
+  border-bottom: 1px solid var(--line);
+  padding: .3rem 0;
+}
+.faq details:first-of-type { border-top: 1px solid var(--line); }
+.faq summary {
+  cursor: pointer; list-style: none;
+  padding: 1rem 2.2rem 1rem 0; position: relative;
+  font-family: var(--font-display); font-size: 1.08rem; color: var(--pine-deep);
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "+"; position: absolute; right: .4rem; top: 50%; transform: translateY(-50%);
+  font-size: 1.5rem; line-height: 1; color: var(--terra); font-family: var(--font-body);
+}
+.faq details[open] summary::after { content: "–"; }
+.faq summary:hover { color: var(--terra-deep); }
+.faq details p { padding: 0 0 1.1rem; color: var(--ink-soft); }
+
+/* Faktenband — dreiteilige Übersicht, die auf Detailseiten dort steht, wo sonst
+   ein Foto stünde. Enthält ausschließlich Angaben, die im Text der Seite stehen. */
+.fakten-band { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.8rem 0; }
+.fakten-band .fakt {
+  background: var(--paper-deep); border-radius: var(--radius);
+  padding: 1.5rem 1.2rem; text-align: center;
+}
+.fakten-band .zahl {
+  display: block; font-family: var(--font-display); font-size: 1.85rem;
+  line-height: 1.1; color: var(--pine-deep);
+}
+.fakten-band .was { display: block; margin-top: .4rem; font-size: .95rem; color: var(--ink-soft); }
+@media (max-width: 620px) {
+  .fakten-band { grid-template-columns: 1fr; gap: .7rem; }
+  .fakten-band .fakt { display: flex; align-items: baseline; gap: .8rem; text-align: left; padding: 1rem 1.2rem; }
+  .fakten-band .zahl { font-size: 1.4rem; flex: none; }
+  .fakten-band .was { margin-top: 0; }
+}
 .method-head {
   background: var(--paper-deep); border-radius: var(--radius); padding: 1.6rem 1.9rem; margin-bottom: 1.4rem;
 }
@@ -389,6 +480,8 @@ strong { font-weight: 700; }
 }
 @media (max-width: 760px) {
   .masonry { columns: 1; }
+  /* Gesperrte Versalien sind klein schwer zu lesen — auf dem Handy etwas größer. */
+  .eyebrow { font-size: .9rem; }
 }
 @media (max-width: 400px) {
   .brand-mark { height: 38px; }
@@ -430,7 +523,23 @@ strong { font-weight: 700; }
 .form-hint { font-size: .92rem; margin-top: .2rem; min-height: 1.2em; }
 .form-hint.success { color: var(--pine); }
 .form-hint.error { color: var(--terra-deep); }
-.form-fineprint { font-size: .82rem; color: var(--ink-soft); margin-top: -.3rem; }
+.form-fineprint { font-size: .875rem; color: var(--ink-soft); margin-top: -.3rem; }
+.form-hint a { color: var(--terra-deep); }
+
+/* Bestätigung nach dem Versand — ersetzt das Formular an Ort und Stelle. */
+.dank-karte {
+  background: var(--cream); border: 2px solid var(--pine-soft); border-radius: var(--radius);
+  padding: 2.2rem 1.9rem; text-align: center;
+}
+.dank-karte:focus { outline: none; }
+.dank-icon {
+  display: grid; place-items: center; width: 54px; height: 54px; margin: 0 auto 1rem;
+  border-radius: 50%; background: var(--pine); color: var(--paper); font-size: 1.6rem;
+}
+.dank-karte h3 { font-size: 1.5rem; margin-bottom: .6rem; }
+.dank-karte p { color: var(--ink-soft); }
+.dank-alt { margin-top: 1rem; font-size: .95rem; }
+.dank-alt a { color: var(--pine); font-weight: 600; }
 
 .contact-side { display: grid; gap: 1.2rem; }
 .contact-card { background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.6rem 1.7rem; box-shadow: var(--shadow-soft); }
@@ -441,7 +550,12 @@ strong { font-weight: 700; }
 .contact-list li { display: grid; grid-template-columns: auto 1fr; gap: .9rem; align-items: start; }
 .contact-list .ci { width: 40px; height: 40px; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--terra-soft); color: var(--terra-deep); font-size: 1.15rem; }
 .contact-list .ci-label { display: block; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: .1rem; }
-.contact-list a { color: var(--pine); text-decoration: none; font-weight: 600; word-break: break-word; }
+/* Anrufen und Mailen sind auf dem Handy die wichtigsten Wege — entsprechend
+   großzügige Tippflächen statt nackter Textzeilen. */
+.contact-list a {
+  color: var(--pine); text-decoration: none; font-weight: 600; word-break: break-word;
+  display: inline-block; padding: .5rem 0; min-height: 24px;
+}
 .contact-list a:hover { color: var(--terra-deep); }
 
 .booking-head { max-width: 640px; margin: 0 auto 2.4rem; }

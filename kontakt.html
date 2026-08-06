@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kontakt & Terminbuchung – Silvia Gabi Schuldis</title>
-  <meta name="description" content="Nimm Kontakt zu Silvia Gabi Schuldis auf – per Anfrageformular oder direkt telefonisch. Oder buche dir gleich online einen Termin für dein kostenfreies Kennenlerngespräch.">
+  <meta name="description" content="Schreib Silvia Schuldis direkt über das Kontaktformular oder buche dein kostenfreies Kennenlerngespräch. Telefon: 0176 39521792.">
   <link rel="canonical" href="https://mrrobb86.github.io/silvia-schuldis-website/kontakt.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Silvia Gabi Schuldis – Masterhealer &amp; Impulscoach">
   <meta property="og:locale" content="de_DE">
   <meta property="og:title" content="Kontakt & Terminbuchung – Silvia Gabi Schuldis">
-  <meta property="og:description" content="Nimm Kontakt auf – per Anfrageformular, telefonisch oder buche direkt online dein kostenfreies Kennenlerngespräch.">
+  <meta property="og:description" content="Schreib Silvia Schuldis direkt über das Kontaktformular oder buche dein kostenfreies Kennenlerngespräch. Telefon: 0176 39521792.">
   <meta property="og:url" content="https://mrrobb86.github.io/silvia-schuldis-website/kontakt.html">
   <meta property="og:image" content="https://mrrobb86.github.io/silvia-schuldis-website/img/silvia-hero.jpg">
   <meta name="twitter:card" content="summary_large_image">
@@ -82,6 +82,12 @@
         <p class="contact-intro">Erzähl mir kurz, worum es geht – ganz unverbindlich. Ich melde mich persönlich bei dir zurück.</p>
 
         <form id="kontaktForm" class="contact-form" novalidate>
+          <!-- Spam-Falle: für Menschen unsichtbar. Füllt ein Bot sie aus,
+               verwirft Formspree die Einsendung. -->
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true"
+                 style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+          <input type="hidden" name="_subject" value="Neue Anfrage über silvia-schuldis.de">
+
           <div class="field">
             <label for="k-name">Name <span aria-hidden="true">*</span></label>
             <input type="text" id="k-name" name="name" autocomplete="name" required>
@@ -116,14 +122,22 @@
           </div>
 
           <div class="field-check">
-            <input type="checkbox" id="k-consent" name="consent" required>
+            <input type="checkbox" id="k-consent" name="privacy" value="einverstanden" required>
             <label for="k-consent">Ich habe die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und bin damit einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage verarbeitet werden. <span aria-hidden="true">*</span></label>
           </div>
 
-          <button type="submit" class="btn btn-solid btn-full-mob">Nachricht senden</button>
+          <button type="submit" class="btn btn-solid btn-full-mob" id="kontaktSenden">Nachricht senden</button>
           <p class="form-hint" id="formHint" role="status" aria-live="polite"></p>
-          <p class="form-fineprint"><span aria-hidden="true">*</span> Pflichtfeld</p>
+          <p class="form-fineprint"><span aria-hidden="true">*</span> Pflichtfeld · Keine Weitergabe an Dritte</p>
         </form>
+
+        <!-- Wird nach erfolgreichem Versand anstelle des Formulars eingeblendet. -->
+        <div class="dank-karte" id="dankKarte" hidden>
+          <span class="dank-icon" aria-hidden="true">✓</span>
+          <h3>Vielen Dank!</h3>
+          <p>Deine Nachricht ist angekommen. Silvia meldet sich persönlich bei dir zurück – in der Regel innerhalb weniger Tage.</p>
+          <p class="dank-alt">Du hast es eilig? <a href="tel:+4917639521792">0176 39521792</a></p>
+        </div>
       </div>
 
       <!-- Direkter Kontakt -->
