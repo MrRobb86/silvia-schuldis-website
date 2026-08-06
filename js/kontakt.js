@@ -5,12 +5,10 @@
 // mailto-Weg scheiterte auf Handys regelmäßig, weil dort oft kein Mailprogramm
 // eingerichtet ist).
 //
-// ┌──────────────────────────────────────────────────────────────────────────┐
-// │ HIER DIE FORMULAR-ID EINTRAGEN                                           │
-// │ In formspree.io ein neues Formular anlegen, Empfängeradresse hinterlegen │
-// │ und die ID aus der Endpunkt-URL (formspree.io/f/XXXXXXXX) unten setzen.  │
-// └──────────────────────────────────────────────────────────────────────────┘
-var FORMSPREE_ID = 'HIER_ID_EINTRAGEN';
+// Formular „Website Kontaktformular" im Formspree-Konto von Silvia Schuldis.
+// Empfängerin: silvia@silviaschuldis.de (verifiziert). Free Plan, 50 Einsendungen
+// pro Monat — bei Bedarf im Konto nachsehen, der Zähler läuft ohne Warnung voll.
+var FORMSPREE_ID = 'xaewnqkr';
 
 (function () {
   var form = document.getElementById('kontaktForm');
@@ -58,7 +56,9 @@ var FORMSPREE_ID = 'HIER_ID_EINTRAGEN';
       return;
     }
 
-    if (FORMSPREE_ID === 'HIER_ID_EINTRAGEN') {
+    // Netz für den Fall, dass die Kennung einmal leer ist oder wieder auf einen
+    // Platzhalter zurückfällt — dann lieber die Rückfallmeldung als ein toter Knopf.
+    if (!FORMSPREE_ID || FORMSPREE_ID.indexOf('HIER') === 0) {
       melderFehler();
       return;
     }
