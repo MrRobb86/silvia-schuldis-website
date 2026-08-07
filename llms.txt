@@ -15,5 +15,5 @@ Silvia Schuldis arbeitet ganzheitlich, intuitiv und an der Wurzel: an unbewusste
 
 - [Über mich](https://mrrobb86.github.io/silvia-schuldis-website/uber-mich.html): Werdegang, Qualifikationen (Mastercoach, Bewusstseinstrainerin, geistiges Heilen, russische Heilmethoden, Metamorphose) und Haltung.
 - [Stimmen](https://mrrobb86.github.io/silvia-schuldis-website/stimmen.html): Original-Erfahrungsberichte von Klientinnen und Klienten.
-- [Kontakt & Terminbuchung](https://mrrobb86.github.io/silvia-schuldis-website/kontakt.html): Anfrageformular, Telefon (0176 39521792), E-Mail (schuldis@googlemail.com) und Online-Terminbuchung für ein kostenfreies Kennenlerngespräch.
+- [Kontakt & Terminbuchung](https://mrrobb86.github.io/silvia-schuldis-website/kontakt.html): Anfrageformular, Telefon (0176 39521792), E-Mail (silvia@silviaschuldis.de) und Online-Terminbuchung für ein kostenfreies Kennenlerngespräch.
 - [Impressum](https://mrrobb86.github.io/silvia-schuldis-website/impressum.html), [Datenschutz](https://mrrobb86.github.io/silvia-schuldis-website/datenschutz.html), [AGB](https://mrrobb86.github.io/silvia-schuldis-website/agb.html)

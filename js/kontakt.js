@@ -18,7 +18,7 @@ var FORMSPREE_ID = 'xaewnqkr';
   var knopf = document.getElementById('kontaktSenden');
   var dank = document.getElementById('dankKarte');
 
-  var MAIL = 'schuldis@googlemail.com';
+  var MAIL = 'silvia@silviaschuldis.de';
   var TEL = '0176 39521792';
 
   function melde(text, art) {
