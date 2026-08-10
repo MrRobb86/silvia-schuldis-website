@@ -23,7 +23,22 @@ jobs:
       - name: Repository auschecken
         uses: actions/checkout@v4
 
+      # Solange die Zugangsdaten fehlen, sauber überspringen statt rot fehlzuschlagen.
+      # Der Wert kommt über env herein, nicht direkt in die Befehlszeile.
+      - name: Zugangsdaten hinterlegt?
+        id: pruefung
+        env:
+          SERVER: ${{ secrets.HETZNER_FTP_SERVER }}
+        run: |
+          if [ -z "$SERVER" ]; then
+            echo "bereit=false" >> "$GITHUB_OUTPUT"
+            echo "::notice title=Übertragung übersprungen::Die Secrets HETZNER_FTP_SERVER, HETZNER_FTP_USER und HETZNER_FTP_PASSWORD sind noch nicht hinterlegt."
+          else
+            echo "bereit=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Per FTPS hochladen
+        if: steps.pruefung.outputs.bereit == 'true'
         # Auf den Commit festgenagelt statt auf den Tag v4.3.5: Ein Tag lässt sich
         # nachträglich verschieben, ein Commit nicht. Die Action bekommt hier
         # Zugangsdaten zu sehen — da ist das die sichere Variante.
