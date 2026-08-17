@@ -555,6 +555,11 @@ strong { font-weight: 700; }
 .booking-placeholder .bp-icon { font-size: 2.6rem; display: block; margin-bottom: .6rem; }
 .booking-placeholder h3 { font-size: 1.35rem; margin-bottom: .6rem; }
 .booking-placeholder p { color: var(--ink-soft); margin-bottom: 1.4rem; }
+/* Calendly-Einbettung: Höhe kommt vom iframe-Attribut, Rahmen vom bestehenden
+   .booking-embed iframe. Der Fallback darunter greift, wenn das Widget
+   blockiert wird (Browser-Schutz, Adblocker, Cookie-Einstellungen). */
+.booking-fallback { margin-top: 1rem; font-size: .95rem; color: var(--ink-soft); text-align: center; }
+.booking-fallback a { color: var(--terra-deep); text-decoration: underline; }
 
 @media (max-width: 860px) {
   .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
