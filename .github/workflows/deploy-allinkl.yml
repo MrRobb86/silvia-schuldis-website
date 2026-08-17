@@ -1,0 +1,57 @@
+name: Deploy zu ALL-INKL
+
+# Lädt die Seite per FTPS auf den ALL-INKL-Webspace von Silvia Schuldis.
+# Tarif PrivatPlus hat kein SSH/SFTP — deshalb FTPS statt rsync oder git pull.
+#
+# Ziel: https://silviaschuldis.de/ · Verzeichnis /silviaschuldis.de/ an der FTP-Wurzel.
+#
+# Warum lftp und nicht mehr FTP-Deploy-Action:
+# Der kasserver verlangt, dass die Datenverbindung die TLS-Sitzung der
+# Steuerverbindung wiederverwendet. Die Node-Action scheitert daran mit
+# "tlsv1 alert decode error (data socket)" — Login, Verzeichnisliste und
+# Ordneranlage klappen, die erste Dateiuebertragung nicht. lftp beherrscht
+# diese Wiederverwendung und nimmt abgebrochene Uebertragungen wieder auf.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-allinkl
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: lftp installieren
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq lftp
+
+      - name: Per FTPS hochladen
+        env:
+          FTP_SERVER: ${{ secrets.HETZNER_FTP_SERVER }}
+          FTP_USER: ${{ secrets.HETZNER_FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.HETZNER_FTP_PASSWORD }}
+        run: |
+          if [ -z "$FTP_SERVER" ] || [ -z "$FTP_USER" ] || [ -z "$FTP_PASSWORD" ]; then
+            echo "::notice title=Uebertragung uebersprungen::Die Secrets sind nicht vollstaendig hinterlegt."
+            exit 0
+          fi
+          lftp -u "$FTP_USER","$FTP_PASSWORD" "ftp://$FTP_SERVER" -e "
+            set cmd:fail-exit true;
+            set ftp:ssl-force true;
+            set ftp:ssl-protect-data true;
+            set ssl:verify-certificate yes;
+            set ftp:passive-mode true;
+            set net:timeout 20;
+            set net:max-retries 3;
+            set net:reconnect-interval-base 5;
+            set mirror:parallel-transfer-count 3;
+            mirror --reverse --continue --verbose --no-perms --exclude-glob .git* --exclude .github/ --exclude-glob README.md ./ /silviaschuldis.de/;
+            bye"
