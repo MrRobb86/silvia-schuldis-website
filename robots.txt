@@ -33,4 +33,4 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-Sitemap: https://mrrobb86.github.io/silvia-schuldis-website/sitemap.xml
+Sitemap: https://silviaschuldis.de/sitemap.xml

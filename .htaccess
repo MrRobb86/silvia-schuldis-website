@@ -1,0 +1,49 @@
+# Konfiguration für den Apache-Webserver bei ALL-INKL.
+# Ziel: silviaschuldis.de immer über HTTPS und ohne "www".
+
+Options -Indexes
+DirectoryIndex index.html index.php
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1. HTTPS erzwingen.
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^(.*)$ https://silviaschuldis.de/$1 [R=301,L]
+
+  # 2. www entfernen — das Let's-Encrypt-Zertifikat läuft auf die Domain ohne www.
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^(.*)$ https://silviaschuldis.de/$1 [R=301,L]
+</IfModule>
+
+# Eigene Fehlerseiten gibt es (noch) nicht — Apache-Standard ist hier ehrlicher
+# als eine Weiterleitung auf die Startseite, die Suchmaschinen verwirrt.
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# Zeichensatz festnageln, damit Umlaute nicht vom Serverstandard abhängen.
+AddDefaultCharset UTF-8
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json image/svg+xml
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  # Bilder und Schriften ändern sich praktisch nie — lange cachen.
+  ExpiresByType image/jpeg               "access plus 1 year"
+  ExpiresByType image/png                "access plus 1 year"
+  ExpiresByType image/webp               "access plus 1 year"
+  ExpiresByType image/svg+xml            "access plus 1 year"
+  ExpiresByType font/woff2               "access plus 1 year"
+  # CSS und JS mittelfristig, damit Korrekturen zeitnah ankommen.
+  ExpiresByType text/css                 "access plus 7 days"
+  ExpiresByType application/javascript   "access plus 7 days"
+  # HTML nicht cachen — sonst sehen Besucher nach einem Deploy die alte Seite.
+  ExpiresByType text/html                "access plus 0 seconds"
+</IfModule>
