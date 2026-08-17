@@ -53,7 +53,7 @@ jobs:
           # "website/". Der abschließende Schrägstrich lädt den INHALT hoch,
           # nicht das Verzeichnis selbst. Gilt für beide Seiten.
           local-dir: ./
-          server-dir: /public_html/
+          server-dir: /silviaschuldis.de/
           # Nichts pauschal löschen: Die Action gleicht per Prüfsummen ab und
           # überträgt beim zweiten Lauf nur noch Geändertes.
           dangerous-clean-slate: false
