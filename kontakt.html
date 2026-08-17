@@ -196,9 +196,21 @@
         height="760"
         style="border:0"></iframe>
 
-      <p class="booking-fallback">Der Kalender lädt nicht? Dann öffne die Buchungsseite direkt:
-        <a href="https://calendly.com/silvia-gm7h/30-minuten-kostenfreies-gesprach" target="_blank" rel="noopener">Termin bei Calendly buchen</a>
-        — oder schreib mir <a href="#kontaktForm">über das Formular</a> beziehungsweise ruf an: <a href="tel:+4917639521792">0176 39521792</a>.</p>
+      <!-- Wird von js/termin.js eingeblendet, wenn Calendly sich nicht meldet. -->
+      <div class="booking-placeholder" id="terminHinweis" hidden>
+        <div class="bp-inner">
+          <span class="bp-icon" aria-hidden="true">📅</span>
+          <h3>Terminbuchung wird gerade eingerichtet</h3>
+          <p>Der Online-Kalender ist noch nicht freigeschaltet. Deinen Termin vereinbaren wir bis dahin ganz unkompliziert — ich melde mich persönlich bei dir:</p>
+          <div class="cta-actions center-actions">
+            <a href="#kontaktForm" class="btn btn-solid">Über das Formular anfragen</a>
+            <a href="tel:+4917639521792" class="btn btn-ghost">0176 39521792 anrufen</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="booking-fallback">Du kannst die Buchungsseite auch direkt öffnen:
+        <a href="https://calendly.com/silvia-gm7h" target="_blank" rel="noopener">Kalender von Silvia bei Calendly</a>.</p>
     </div>
   </div>
 </section>
@@ -253,5 +265,6 @@
 
 <script src="js/main.js"></script>
 <script src="js/kontakt.js"></script>
+<script src="js/termin.js"></script>
 </body>
 </html>
