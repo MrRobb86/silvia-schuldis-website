@@ -180,23 +180,35 @@
 
     <div class="booking-embed reveal">
       <!--
-        Calendly, direkt eingebettet (Kundenwunsch).
-        loading="lazy" ist Absicht: Der Kalender wird erst geladen, wenn der
-        Besucher bis hierher scrollt — wer nie bis zur Terminbuchung kommt, baut
-        auch keine Verbindung zu Calendly auf.
-        Calendlys eigener Cookie-Hinweis im Widget wird NICHT ausgeblendet
-        (kein hide_gdpr_banner) — er ist die einzige Einwilligungsebene.
-        Siehe Abschnitt 5 der Datenschutzerklärung.
+        Calendly wird ERST nach ausdrücklicher Einwilligung geladen (§ 25 Abs. 1
+        TDDDG, Art. 6 Abs. 1 lit. a DSGVO). Vor dem Klick geht keine einzige
+        Verbindung zu Calendly hinaus, es wird nichts auf dem Endgerät des
+        Besuchers gespeichert. Das iframe entsteht erst in js/termin.js.
+        Die Einwilligung wird bewusst NICHT gespeichert — dadurch bleibt die
+        Website vollständig frei von eigenen Cookies, und der Widerruf ist
+        schlicht das Neuladen der Seite.
       -->
-      <iframe
-        src="https://calendly.com/silvia-gm7h/30-minuten-kostenfreies-gesprach?embed_domain=silviaschuldis.de&amp;embed_type=Inline"
-        title="Terminbuchung: 30 Minuten kostenfreies Gespräch mit Silvia Schuldis"
-        loading="lazy"
-        width="100%"
-        height="760"
-        style="border:0"></iframe>
+      <div class="consent-card" id="terminConsent">
+        <span class="cc-icon" aria-hidden="true">📅</span>
+        <h3>Kalender anzeigen</h3>
+        <p>Die Terminbuchung läuft über <strong>Calendly</strong> (Calendly, LLC, USA). Wenn du den Kalender lädst, werden deine <strong>IP-Adresse</strong> und Angaben zu deinem Gerät an Calendly in die <strong>USA</strong> übertragen, und Calendly speichert Cookies sowie Einträge im lokalen Speicher deines Browsers (unter anderem <span class="cc-code">cal_anonymous_id</span> und <span class="cc-code">__stripe_mid</span>).</p>
+        <p>Ohne deinen Klick passiert davon <strong>nichts</strong>. Näheres in der <a href="datenschutz.html#termin" target="_blank" rel="noopener">Datenschutzerklärung</a>.</p>
 
-      <!-- Wird von js/termin.js eingeblendet, wenn Calendly sich nicht meldet. -->
+        <div class="cc-check">
+          <input type="checkbox" id="terminEinwilligung">
+          <label for="terminEinwilligung">Ja, ich bin einverstanden, dass der Kalender von Calendly geladen wird und dabei Daten in die USA übertragen werden.</label>
+        </div>
+
+        <button type="button" class="btn btn-solid" id="terminLaden">Kalender laden</button>
+        <p class="cc-hint" id="terminFehler" hidden role="status">Bitte setze zuerst das Häkchen — ohne deine Einwilligung darf ich den Kalender nicht laden.</p>
+
+        <p class="cc-fine">Du kannst deine Einwilligung jederzeit widerrufen, indem du diese Seite neu lädst. Lieber ohne Calendly? Dann schreib mir <a href="#kontaktForm">über das Formular</a> oder ruf an: <a href="tel:+4917639521792">0176 39521792</a>.</p>
+      </div>
+
+      <!-- Hierhin setzt js/termin.js nach der Einwilligung das Calendly-iframe. -->
+      <div id="terminRahmen"></div>
+
+      <!-- Wird eingeblendet, wenn Calendly nach der Einwilligung nicht antwortet. -->
       <div class="booking-placeholder" id="terminHinweis" hidden>
         <div class="bp-inner">
           <span class="bp-icon" aria-hidden="true">📅</span>
@@ -208,9 +220,6 @@
           </div>
         </div>
       </div>
-
-      <p class="booking-fallback">Du kannst die Buchungsseite auch direkt öffnen:
-        <a href="https://calendly.com/silvia-gm7h" target="_blank" rel="noopener">Kalender von Silvia bei Calendly</a>.</p>
     </div>
   </div>
 </section>
