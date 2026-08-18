@@ -262,6 +262,10 @@ strong { font-weight: 700; }
 }
 .offer-body { padding: 1.7rem 1.7rem 1.9rem; display: flex; flex-direction: column; gap: .8rem; flex: 1; }
 .offer-body p { color: var(--ink-soft); font-size: 1rem; flex: 1; }
+/* Auf angebote.html sind die vier Karten Ebene 2 (dort ist "Komm in deine
+   Strahlkraft" die H1), auf der Startseite Ebene 3 unter derselben Ueberschrift.
+   Beide sollen gleich aussehen — die Semantik aendert sich, die Optik nicht. */
+.offer-body h2 { font-size: 1.35rem; margin-bottom: .5rem; }
 .offer-link {
   font-weight: 700; text-decoration: none; color: var(--terra);
   /* Als Block mit Innenabstand, damit die Tippfläche auf dem Handy die
