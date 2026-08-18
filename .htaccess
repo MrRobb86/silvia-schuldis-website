@@ -16,8 +16,11 @@ DirectoryIndex index.html index.php
   RewriteRule ^(.*)$ https://silviaschuldis.de/$1 [R=301,L]
 </IfModule>
 
-# Eigene Fehlerseiten gibt es (noch) nicht — Apache-Standard ist hier ehrlicher
-# als eine Weiterleitung auf die Startseite, die Suchmaschinen verwirrt.
+# Eigene 404-Seite. Bewusst als Pfad und nicht als volle URL: Bei einer URL
+# antwortet Apache mit einer Weiterleitung, und Google sieht statt "weg" ein
+# "gefunden" (Soft 404). So bleibt der Statuscode 404, die Seite sieht aber
+# aus wie der Rest der Website.
+ErrorDocument 404 /404.html
 
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"

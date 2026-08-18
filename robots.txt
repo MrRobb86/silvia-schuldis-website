@@ -1,5 +1,4 @@
 # robots.txt – Silvia Gabi Schuldis
-# HINWEIS: Basis-URL beim Umzug auf die finale Domain anpassen (aktuell GitHub-Pages-Vorschau).
 
 # Klassische Suchmaschinen
 User-agent: *
