@@ -33,3 +33,6 @@ User-agent: CCBot
 Allow: /
 
 Sitemap: https://silviaschuldis.de/sitemap.xml
+
+# Kurzbeschreibung der Website fuer KI-Modelle (Konvention llmstxt.org)
+# https://silviaschuldis.de/llms.txt
