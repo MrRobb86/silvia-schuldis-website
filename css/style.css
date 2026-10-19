@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Silvia Schuldis – Bewusstseinstrainerin & Mastercoach
+   Silvia Schuldis – Impulscoach & Bewusstseinstrainerin
    Design: "Innere Kraft" – warmes Papier, tiefes Tannengrün, Terracotta
    Schriften: Fraunces (Display), Karla (Text), Caveat (Handschrift)
    ========================================================================== */
@@ -84,6 +84,7 @@ strong { font-weight: 700; }
 .eyebrow::before { content: "✦  "; font-size: .75rem; }
 .hand { font-family: var(--font-hand); font-size: 1.5rem; color: var(--sage); font-weight: 500; }
 .lead { font-size: 1.2rem; color: var(--ink-soft); }
+.mini { font-size: .86rem; color: var(--ink-soft); line-height: 1.6; }
 
 /* Hand-gezeichnete Unterstreichung */
 .squiggle { position: relative; white-space: nowrap; }
@@ -119,7 +120,14 @@ strong { font-weight: 700; }
 .brand { display: flex; align-items: center; gap: .55rem; text-decoration: none; }
 /* Original-Logo: Bildmarke (Hände + Herz) und Schriftblock als freigestellte Grafiken */
 .brand-mark { width: auto; height: 44px; flex: none; }
-.brand-type { width: auto; height: 48px; }
+/* brand-text stapelt Schriftzug und Untertitel; min-width:0 verhindert, dass der
+   Flex-Block die Navigation wegdrückt, wenn der Platz knapp wird. */
+.brand-text { display: flex; flex-direction: column; align-items: flex-start; gap: .1rem; min-width: 0; }
+.brand-type { width: auto; height: 40px; }
+.brand-sub {
+  font-size: .64rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-soft); white-space: nowrap; line-height: 1.2;
+}
 .main-nav { display: flex; align-items: center; gap: 1.7rem; }
 .main-nav > a:not(.btn) {
   text-decoration: none; font-weight: 500; font-size: 1rem; color: var(--ink);
@@ -420,6 +428,12 @@ strong { font-weight: 700; }
 .site-foot ul { list-style: none; padding: 0; display: grid; gap: .5rem; }
 .site-foot a { color: #B9C4B6; text-decoration: none; font-size: .97rem; }
 .site-foot a:hover { color: #fff; }
+/* Rechtliche Abgrenzung – auf jeder Seite im Footer, bewusst zurückgenommen,
+   aber lesbar (nicht kleiner als .82rem). */
+.foot-abgrenzung {
+  margin: 2rem 0 0; padding-top: 1.4rem; border-top: 1px solid rgba(250, 245, 236, .18);
+  font-size: .82rem; line-height: 1.65; max-width: 70ch;
+}
 .foot-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding: 1.4rem 0; border-top: 1px solid rgba(250,245,236,.12); font-size: .88rem; }
 .foot-legal { display: flex; gap: 1.4rem; }
 
@@ -473,7 +487,8 @@ strong { font-weight: 700; }
 }
 @media (max-width: 400px) {
   .brand-mark { height: 38px; }
-  .brand-type { height: 42px; }
+  .brand-type { height: 34px; }
+  .brand-sub { font-size: .58rem; letter-spacing: .07em; }
 }
 
 /* ---------- Kontaktseite: Formular, Karten, Terminbuchung ---------- */
