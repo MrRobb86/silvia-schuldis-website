@@ -20,6 +20,12 @@ DirectoryIndex index.html index.php
   # Lesezeichen und verschickten Links nicht ins Leere läuft und Google die
   # Bewertung der alten Seite auf die neue überträgt.
   RewriteRule ^heilsitzungen\.html$ /herzkraftzeit.html [R=301,L]
+
+  # 4. Zurueckgezogene Bilder sperren.
+  # Der FTP-Abgleich spiegelt nur hinzu und loescht nichts - eine aus dem
+  # Repository entfernte Datei bleibt also auf dem Webspace abrufbar.
+  # [G] liefert 410 Gone: dauerhaft weg, Suchmaschinen nehmen es aus dem Index.
+  RewriteRule ^img/gruppe-panorama\.jpg$ - [G]
 </IfModule>
 
 # Eigene 404-Seite. Bewusst als Pfad und nicht als volle URL: Bei einer URL
