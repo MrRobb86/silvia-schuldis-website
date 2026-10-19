@@ -312,6 +312,33 @@ strong { font-weight: 700; }
 .callout.warm { background: var(--terra-soft); border-left-color: var(--terra); color: var(--terra-deep); }
 .detail-photo { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-soft); margin: 1.8rem 0; }
 
+/* Terminbox — Inhalt kommt aus termine.json, gefuellt von js/termine.js.
+   Steht nichts drin, bleibt das Element leer und faellt per [hidden] weg. */
+.terminbox[hidden], .termin-band[hidden] { display: none; }
+.terminbox {
+  border: 2px solid var(--terra); border-radius: var(--radius);
+  background: var(--terra-soft); padding: 1.2rem 1.4rem; margin: 0 0 1.8rem;
+}
+.terminbox .termin-label {
+  margin: 0; font-size: .78rem; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--terra-deep);
+}
+.terminbox .termin-datum {
+  margin: .25rem 0 0; font-family: var(--font-display);
+  font-size: clamp(1.35rem, 3vw, 1.7rem); font-weight: 700; color: var(--pine-deep);
+}
+.terminbox .termin-zusatz { margin: .3rem 0 0; font-size: .95rem; color: var(--ink-soft); }
+
+/* Schmales Band fuer Start- und Angebote-Seite */
+.termin-band {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem 2rem;
+  margin: 0 auto 2rem; padding: .9rem 1.2rem; max-width: 760px;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--cream); font-size: .95rem;
+}
+.termin-band .termin-zeile { color: var(--ink); }
+.termin-band strong { color: var(--terra-deep); }
+
 /* Häufige Fragen — sichtbar auf der Seite, damit die FAQ-Auszeichnung im
    Seitenkopf gedeckt ist. Google verlangt, dass ausgezeichnete Inhalte auch
    für Besucher sichtbar sind. */

@@ -1,0 +1,15 @@
+{
+  "_anleitung": "Hier stehen die Termine, die auf der Website angezeigt werden. Aendere nur den Text zwischen den Anfuehrungszeichen. Anfuehrungszeichen, Doppelpunkte und Kommas bitte stehen lassen. Ist 'datum' leer, erscheint der Termin nicht auf der Website.",
+
+  "kraftkurs": {
+    "ueberschrift": "Nächster Start",
+    "datum": "",
+    "zusatz": ""
+  },
+
+  "retreat": {
+    "ueberschrift": "Nächstes Retreat",
+    "datum": "",
+    "zusatz": ""
+  }
+}
