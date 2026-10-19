@@ -14,6 +14,12 @@ DirectoryIndex index.html index.php
   # 2. www entfernen — das Let's-Encrypt-Zertifikat läuft auf die Domain ohne www.
   RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
   RewriteRule ^(.*)$ https://silviaschuldis.de/$1 [R=301,L]
+
+  # 3. Umbenennung Heilsitzungen -> HerzKraftZeit (Oktober 2026).
+  # Dauerhafte Weiterleitung, damit die alte Adresse aus Suchergebnissen,
+  # Lesezeichen und verschickten Links nicht ins Leere läuft und Google die
+  # Bewertung der alten Seite auf die neue überträgt.
+  RewriteRule ^heilsitzungen\.html$ /herzkraftzeit.html [R=301,L]
 </IfModule>
 
 # Eigene 404-Seite. Bewusst als Pfad und nicht als volle URL: Bei einer URL
