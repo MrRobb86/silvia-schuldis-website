@@ -270,6 +270,10 @@ strong { font-weight: 700; }
 }
 .offer-body { padding: 1.7rem 1.7rem 1.9rem; display: flex; flex-direction: column; gap: .8rem; flex: 1; }
 .offer-body p { color: var(--ink-soft); font-size: 1rem; flex: 1; }
+/* Auf angebote.html sind die vier Karten Ebene 2 (dort ist "Komm in deine
+   Strahlkraft" die H1), auf der Startseite Ebene 3 unter derselben Ueberschrift.
+   Beide sollen gleich aussehen — die Semantik aendert sich, die Optik nicht. */
+.offer-body h2 { font-size: 1.35rem; margin-bottom: .5rem; }
 .offer-link {
   font-weight: 700; text-decoration: none; color: var(--terra);
   /* Als Block mit Innenabstand, damit die Tippfläche auf dem Handy die
@@ -570,6 +574,36 @@ strong { font-weight: 700; }
 .booking-placeholder .bp-icon { font-size: 2.6rem; display: block; margin-bottom: .6rem; }
 .booking-placeholder h3 { font-size: 1.35rem; margin-bottom: .6rem; }
 .booking-placeholder p { color: var(--ink-soft); margin-bottom: 1.4rem; }
+/* Calendly-Einbettung: Höhe kommt vom iframe-Attribut, Rahmen vom bestehenden
+   .booking-embed iframe. Der Fallback darunter greift, wenn das Widget
+   blockiert wird (Browser-Schutz, Adblocker, Cookie-Einstellungen). */
+.booking-fallback { margin-top: 1rem; font-size: .95rem; color: var(--ink-soft); text-align: center; }
+.booking-fallback a { color: var(--terra-deep); text-decoration: underline; }
+
+/* Einwilligungskarte vor dem Calendly-Kalender.
+   Bewusst KEIN Banner-Look: Sie sitzt an der Stelle, an der der Kalender
+   erscheint, und gehört optisch zur Seite. */
+.consent-card { max-width: 620px; margin: 0 auto; padding: 2.4rem 2rem; text-align: center;
+  background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); }
+.consent-card .cc-icon { font-size: 2.4rem; display: block; margin-bottom: .5rem; }
+.consent-card h3 { font-size: 1.35rem; margin-bottom: .8rem; }
+.consent-card p { font-size: .95rem; line-height: 1.65; color: var(--ink-soft); margin-bottom: .9rem; text-align: left; }
+.consent-card p strong { color: var(--ink); }
+.consent-card .cc-code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .85em;
+  background: var(--paper-deep); border-radius: 3px; padding: .1em .35em; }
+.cc-check { display: flex; align-items: flex-start; gap: .7rem; text-align: left;
+  margin: 1.3rem 0; padding: .9rem 1rem; background: var(--paper); border-radius: 8px; }
+.cc-check input { width: 1.15rem; height: 1.15rem; margin-top: .15rem; accent-color: var(--terra); flex: none; }
+.cc-check label { font-size: .95rem; line-height: 1.55; color: var(--ink); cursor: pointer; }
+.cc-hint { color: var(--terra-deep); font-size: .9rem; margin-top: .8rem; text-align: center; }
+.cc-fine { font-size: .85rem; color: var(--ink-soft); margin-top: 1.2rem; margin-bottom: 0; text-align: center; }
+.consent-card a { color: var(--terra-deep); text-decoration: underline; }
+#terminRahmen iframe { width: 100%; min-height: 620px; border: 1px solid var(--line);
+  border-radius: var(--radius); background: var(--cream); }
+
+@media (max-width: 600px) {
+  .consent-card { padding: 1.8rem 1.2rem; }
+}
 
 @media (max-width: 860px) {
   .contact-grid { grid-template-columns: 1fr; gap: 2rem; }

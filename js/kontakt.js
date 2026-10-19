@@ -1,14 +1,13 @@
-// Kontaktformular — Versand über Formspree
+// Kontaktformular — Versand über den eigenen Mailserver bei ALL-INKL
 //
-// Die Nachricht geht direkt von der Seite an Formspree, das sie per E-Mail
-// weiterleitet. Das Mailprogramm des Besuchers wird NICHT geöffnet (der frühere
-// mailto-Weg scheiterte auf Handys regelmäßig, weil dort oft kein Mailprogramm
-// eingerichtet ist).
+// Die Nachricht geht per POST an kontakt.php auf demselben Webspace, das sie
+// über den Mailserver von ALL-INKL an das Postfach von Silvia schickt.
+// Das Mailprogramm des Besuchers wird NICHT geöffnet (der frühere mailto-Weg
+// scheiterte auf Handys regelmäßig, weil dort oft kein Mailprogramm eingerichtet ist).
 //
-// Formular „Website Kontaktformular" im Formspree-Konto von Silvia Schuldis.
-// Empfängerin: silvia@silviaschuldis.de (verifiziert). Free Plan, 50 Einsendungen
-// pro Monat — bei Bedarf im Konto nachsehen, der Zähler läuft ohne Warnung voll.
-var FORMSPREE_ID = 'xaewnqkr';
+// Kein Formspree mehr: kein US-Dienstleister in der Kette, kein Monatslimit,
+// keine Speicherung der Nachricht bei einem Dritten.
+var ENDPUNKT = 'kontakt.php';
 
 (function () {
   var form = document.getElementById('kontaktForm');
@@ -56,24 +55,21 @@ var FORMSPREE_ID = 'xaewnqkr';
       return;
     }
 
-    // Netz für den Fall, dass die Kennung einmal leer ist oder wieder auf einen
-    // Platzhalter zurückfällt — dann lieber die Rückfallmeldung als ein toter Knopf.
-    if (!FORMSPREE_ID || FORMSPREE_ID.indexOf('HIER') === 0) {
-      melderFehler();
-      return;
-    }
-
     knopf.disabled = true;
     knopf.textContent = 'Wird gesendet …';
     melde('', '');
 
-    fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+    fetch(ENDPUNKT, {
       method: 'POST',
       body: new FormData(form),
       headers: { Accept: 'application/json' }
     })
       .then(function (antwort) {
         if (!antwort.ok) throw new Error('HTTP ' + antwort.status);
+        return antwort.json();
+      })
+      .then(function (daten) {
+        if (!daten || daten.ok !== true) throw new Error('Server meldet Fehler');
         // Formular ausblenden, Dank einblenden — die Seite bleibt stehen.
         form.hidden = true;
         dank.hidden = false;
